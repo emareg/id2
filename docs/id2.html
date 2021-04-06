@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- title, description, favicon -->
+    <title>ID2 – Identifier Identifiers</title>
+	<meta name="author" content="Emanuel Regnath">
+    <meta name="description" content="Identify Identifiers" />
+
+
+	<!-- load basic style sheet -->
+	<link rel="stylesheet" href="https://classless.de/classless.css">
+	<script type="text/javascript" src="ids.js"></script>
+	<script type="text/javascript" src="id2.js"></script>
+    <script type="text/javascript">
+
+
+	window.onload = function () {
+		console.log("Welcome to ID2!");
+		const box = document.getElementById('idbox');	
+		box.addEventListener('input', handleInput);
+		selfTest()
+		createTable()
+		parseRegex()
+	};
+
+	 function loadJSON(path, callback) {   
+
+	    var xobj = new XMLHttpRequest();
+	    xobj.overrideMimeType("application/json");
+	    xobj.open('GET', path, true); // Replace 'my_data' with the path to your file
+		xobj.setRequestHeader('Accept', 'application/json');
+		xobj.setRequestHeader('Access-Control-Allow-Headers', '*');
+		xobj.setRequestHeader('Access-Control-Allow-Origin', 'file:///');
+	    xobj.onreadystatechange = function () {
+	          if (xobj.readyState == 4 && xobj.status == "200") {
+	            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+	            callback(xobj.responseText);
+	          }
+	    };
+	    xobj.send(null);  
+		// fetch('../ids.json')
+  //  			.then(response => response.json())
+  //  			.then(json => {});	
+	 }
+
+	function handleJSON(json){
+		createTable(ids)
+	}
+
+	function handleInput(e){
+		var t = e.target.value;
+		console.time();
+		ids = iterateAllIds(t)
+		console.timeEnd();  // measure time
+		res = document.getElementById("results")
+		res.textContent = '';
+	    ol = document.createElement('ol');
+
+		for (var i = 0; i < ids.length; i++) {
+	        var item = document.createElement('li');
+	        url = ids[i]['url']
+	        if(url != ""){
+	        	var a = document.createElement('a');
+	        	a.href=url+ids[i]['part'];
+	        	a.title=ids[i]['desc'];
+	        	a.innerHTML=ids[i]['fullid'];
+	        	item.appendChild(a);
+	        } else {
+	        	item.innerHTML = ids[i]['fullid'];
+	        }
+	        ol.appendChild(item);
+		}
+		if(ids.length == 0){
+			res.textContent = ' Sorry, that doesn\'t look like anything to me.';
+		} else {
+			res.appendChild(ol)
+		}
+	}
+
+	function createTable(ids){
+		table = document.getElementById("id-table")
+
+		for (var id in id2data) {
+			tr = document.createElement('tr');
+			e = id2data[id]
+			stlye='style="text-align: left;max-width: 10em; white-space: normal;"'
+			example=e['ex']
+			if(e['url'] != ""){
+				example='<a href="'+e['url']+e['ex']+'">'+e['ex']+'</a>'
+			}
+			tr.innerHTML='<td style="text-align: right;">'+
+				e['id']+'</td><td >'+e['desc']+'</td><td >'+example+'</td>'
+			table.appendChild(tr)
+		}
+
+	}
+
+    	
+
+    </script>
+
+<style type="text/css">
+td {
+	text-align: left;
+	max-width: 20em; 
+	white-space: normal;
+}
+</style>
+</head>
+<body>
+		
+	<!-- Header: -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->  
+	<header>
+		<h1>ID2 – Identify Identifiers</h1>
+		<p>Copy any kind of identifier into the following box.</p>
+		<input class="w-100" id="idbox" placeholder="paste a string">
+	</header>
+
+	<!-- Navigation: -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <nav>
+		<ul>
+		  <li><span >ID2</span></li>
+		  <li><a href="#ids">Identifiers</a></li>
+		  <li class="float-right"><a href="https://github.com/emareg/id2">@GitHub</a></li>
+		</ul>
+    </nav>
+    
+    
+	<!-- Content: -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<main>
+		
+		<div>
+			<h3>Results:</h3>
+			<div id="results" class="w100" style="height:7em; border: 2px solid; padding: 0.5em;">		
+			</div>			
+		</div>
+
+		<section id="id2classes">
+			<h3>ID2 Classes</h3>
+			<p>The following classes exist:</p>
+			<table>
+				<!-- <thead><tr></tr></thead> -->
+				<tbody id="id2classes">
+					<tr><td><code>d</code></td><td>document, digital media, duplicatable</td></tr>
+					<tr><td><code>l</code></td><td>location</td></tr>
+					<tr><td><code>i</code></td><td>general Identifier, transferable</td></tr>
+					<tr><td><code>o</code></td><td>object (phyiscal), one</td></tr>
+					<tr><td><code>q</code></td><td>quantity, amount</td></tr>
+					<tr><td><code>w</code></td><td>Who, uniquely identifies a person</td></tr>
+					<tr><td><code>x</code></td><td>eXtension, eXperiments: for personal use</td></tr>	
+				</tbody>
+			</table>
+		</section>
+
+
+		<section id="ids">
+			<h3>Known Identifiers</h3>
+			<table>
+				<thead><tr>
+					<td style="text-align: right;">ID</td>
+					<td style="text-align: left;">Description</td>
+					<td style="text-align: left;">Example</td>
+				</tr></thead>
+				<tbody id="id-table"></tbody>
+			</table>
+		</section>
+
+	</main>
+
+</body>
+
+</html>
