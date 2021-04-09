@@ -170,6 +170,15 @@ id2data={
 	"url": ""
 },
 
+"l:gln": {
+	"id": "l:gln",
+	"re": "(\\d{13})",
+	"len": "13",
+	"desc": "Global Location Number",
+	"ex": "1234567890123",
+	"url": ""
+},
+
 
 
 
@@ -204,7 +213,7 @@ id2data={
 	"len": "12",
 	"desc": "Google Scholar ID",
 	"ex": "dTfPp2gAAAAJ",
-	"url": ""
+	"url": "https://scholar.google.de/citations?user="
 },
 
 
@@ -360,7 +369,14 @@ id2data={
 },
 
 
-
+"i:did": {
+	"id": "i:did",
+	"re": "did:([a-z]*:[0-9a-zA-Z.-_:]+[0-9a-zA-Z.-_])",
+	"len": "7-",
+	"desc": "Decentralized Identifier",
+	"ex": "did:example:123456789abcdefghi",
+	"url": ""
+},
 
 
 
@@ -383,7 +399,7 @@ id2data={
 },
 "d:rfc": {
 	"id": "d:rfc",
-	"re": "((?:rfc|RC)[1-9][0-9]{1,3})",
+	"re": "((?:rfc|RFC)-?[1-9][0-9]{1,3})",
 	"len": "5-7",
 	"desc": "Request for Comments",
 	"ex": "rfc3339",
@@ -413,6 +429,22 @@ id2data={
 	"desc": "Chemical Abstracts Service Registration Number",
 	"ex": "7732-18-5",
 	"url": "https://webbook.nist.gov/cgi/cbook.cgi?ID="
+},
+"d:isbn": {
+	"id": "d:isbn",
+	"re": "(?:ISBN(?:-13)?:?\ )?(?=[0-9]{13}$|(?=(?:[0-9]+[-\ ]){4})[-\ 0-9]{17}$)(97[89][-\ ]?[0-9]{1,5}[-\ ]?[0-9]+[-\ ]?[0-9]+[-\ ]?[0-9])",
+	"len": "13,17,22,23,26",
+	"desc": "International Standard Book Number",
+	"ex": "978-0-596-52068-7",
+	"url": "https://isbnsearch.org/isbn/"
+},
+"d:issn": {
+	"id": "d:issn",
+	"re": "(?:ISSN:?\ )?([0-9]{4}-[0-9]{3}[0-9X]|977-?[0-9]{4}-?[0-9]{3}-?[0-9]{2}-?[0-9])",
+	"len": "9,13-17,22,23",
+	"desc": "International Standard Serial Number",
+	"ex": "0724-8679",
+	"url": "https://portal.issn.org/resource/ISSN/"
 },
 
 
@@ -488,23 +520,23 @@ id2data={
 	"id": "h:eth",
 	"re": "(0x[a-fA-F0-9]{40})",
 	"len": "42",
-	"desc": "Ethereum",
+	"desc": "Ethereum Address",
 	"ex": "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7",
-	"url": ""
+	"url": "https://etherscan.io/address/"
 },
 "h:bc": {
 	"id": "h:bc",
-	"re": "([13][a-km-zA-HJ-NP-Z1-9]{25,34}|bc(0([ac-hj-np-z02-9]{39}|[ac-hj-np-z02-9]{59})|1[ac-hj-np-z02-9]{8,87}))",
-	"desc": "BitCoin",
-	"len": "35-42",
+	"re": "([13][a-km-zA-HJ-NP-Z1-9]{25,34}|bc[01](?:[ac-hj-np-z02-9]{39}|[ac-hj-np-z02-9]{59}))",
+	"desc": "BitCoin Address",
+	"len": "26-35,42,62",
 	"ex": "3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5",
-	"url": ""
+	"url": "https://btc.com/"
 },
 "h:ltc": {
 	"id": "h:ltc",
 	"re": "[LM3][a-km-zA-HJ-NP-Z1-9]{26,33}",
 	"desc": "Cryptocurrency LiteCoin",
-	"len": "26-33",
+	"len": "27-34",
 	"ex": "LMRGEqXUUzGXT4AYdZNw1UxETmNP1XsFoN",
 	"url": ""
 },
@@ -522,7 +554,7 @@ id2data={
 	"len": "34",
 	"desc": "Cryptocurrency NEO",
 	"ex": "AddZkjqPoPyhDhWoA8f9CXQeHQRDr8HbPo",
-	"url": ""
+	"url": "https://neotracker.io/address/"
 },
 "h:mon": {
 	"id": "h:mon",
@@ -538,8 +570,8 @@ id2data={
 	"re": "Qm[1-9A-HJ-NP-Za-km-z]{44}",
 	"len": "46",
 	"desc": "IPFS Content ID Version 0",
-	"ex": "QmYjtig7VJQ6XsnUjqqJvj7QaMcCAwtrgNdahSiFofrE7o",
-	"url": ""
+	"ex": "QmThqT3hGowNwTZqkTqyGqW2Beeb9SfLHAZXXUNFkirVRQ",
+	"url": "https://explore.ipld.io/#/explore/"
 },
 "h:cid1": {
 	"id": "h:cid1",
@@ -547,12 +579,12 @@ id2data={
 	"len": "51,35",
 	"desc": "IPFS Content ID Version 1",
 	"ex": "bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5q",
-	"url": ""
+	"url": "https://explore.ipld.io/#/explore/"
 },   
 
 "d:ytv": {
 	"id": "d:ytv",
-	"re": "(?:v=)?[0-9A-Za-z_-]{10}[048AEIMQUYcgkosw](?:&t=[0-9]{1,3}s)?",
+	"re": "(?:v=)?([0-9A-Za-z_-]{10}[048AEIMQUYcgkosw])(?:&t=[0-9]{1,3}s)?",
 	"len": "11",
 	"desc": "YouTube Video",
 	"ex": "6avJHaC3C2U",
@@ -596,8 +628,8 @@ id2data={
 	"re": "(?:U\\+|\\\\u)[a-fA-F0-9]{4,5}(?:\\.\\.(?:U\\+)?[a-fA-F0-9]{4,5})?",
 	"desc": "Unicode Symbol",
 	"len": "6,7",
-	"ex": "α",
-	"url": ""
+	"ex": "U+1F194",
+	"url": "https://www.compart.com/en/unicode/"
 },
 
 "i:asci": {
@@ -637,9 +669,6 @@ id2data={
 	"ex": "P52DKC",
 	"url": ""
 },
-
-
-
 
 
 

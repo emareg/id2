@@ -1,38 +1,75 @@
 # ID2 – Identifier Identifiers
 
+Demo: https://emanuel.regnath.info/id2/id2.html
+
 We humans like to ask the four "W" questions: who, what, when, and where. That is why our brains have invented identifiers to answer them but they are also useful for computers to locate resouces.
-However, today there are so many identification schemes that it becomes difficult to distinguish them. Do you know what `apRNMCuBQzc` or `1.3.6.1.4.1.343` identifies? 
+However, today there are so many identification schemes that it becomes difficult to distinguish them. Do you know what `8FWH4HX8+QR` or `1.3.6.1.4.1.343` identifies? 
 
 As a remedy, we are introducing ID2, an identifier idenfication scheme that 
 
+* annotates identifiers in a standardized pure-text form
 * has a short and fixed maximum length
-* has intuitive names
+* has intuitive class names
 * is URN/URL compatible
 
-For the examples above, we could provide `id2:oid:1.3.6.1.4.1.343`
+
+## Syntax
+The full syntax of an ID2 is 
+
+`ID2 = "id2" ":" [dilowtx] ":" [a-z0-9]{2,4} ":" CHAR+`
+
+```
+   class   identifier
+     |     ┌────┴────┐
+ id2:l:olc:8FWH4HX8+QR
+ └┬┘   └┬┘            
+prefix type       
+```
+
+An even shorter form for certain well-known and well-defined IDs are possible in the form of
+
+```
+ §l:8FWH4HX8+QR
+```
+
+In this case `§` serves as the prefix, `l` is the class of the identifier, `:` the separator, and the rest the identifier itself.
 
 
 
-## Category Classes
-Why categories? Easier to remember, helps to identify an id2 because there are only some and prevents name clashes.
 
-We have chosen 8 category identifiers. You might not be able to remember all `id2` identifiers but you can remember these 8 categories. Thus it will be easier to judge what kind of resource this will identify.
+## Identifier Classes
+We have chosen 8 classes of identifiers. Why classes? You might not be able to remember all `id2` identifier types but you can remember these 8 categories. Thus, it will give you a hint what the ID will identify.
+Furthermore, classes help to prevent name clashes of ID types in case two or more IDs have the same name/acronym.
+
+| class   | Meaning                 | Example |
+|---------|-------------------------|---------|
+| **`d`** | Document, Digital Media | DOI     |
+| **`i`** | General Identifier      | UUID    |
+| **`l`** | Location                | OLC     |
+| **`o`** | Object (physical)       | EAN     |
+| **`t`** | Time                    | 24h     |
+| **`q`** | Quantity                | NUM     |
+| **`w`** | Who, human/company      | TEL     |
+| **`x`** | eXtension, eXperiments  | --      |
+
 
 <!-- * **a**: address  agent/animal -->
 <!-- * **c**: Code, Command -->
-* **d**: Document, digital media, duplicatable
-* **i**: general Identifier, transferable
+<!-- * **d**: Document, digital media, duplicatable -->
+<!-- * **i**: general Identifier, transferable -->
+<!-- * **l**: Location  -->
+<!-- => G für geo-location,  -->
+<!-- * **o**: Object (phyiscal), one -->
+<!-- * **t**: Time -->
 <!-- * **h**: Hash digests -->
-* **l**: Location => G für geo-location, 
-* **o**: Object (phyiscal), one
-* **p**: person, people, comPany
-* **q**: quantity, amount
+<!-- * **q**: quantity, amount -->
+<!-- * **p**: person, people, comPany -->
 <!-- * **r**: resource -->
-* **t**: Time
 <!-- * **f**: Format/Language: (JSON, TOML, HTML, Text)  this is not an "ID" -->
 <!-- * **k**: keys -->
-<!-- * **w**: Who, uniquely identifies a person  => `h` for human, `e` for entity, `a` for agent/animal -->
-* **x**: eXtension, eXperiments: for personal use
+<!-- * **w**: Who, uniquely identifies a person   -->
+<!-- => `h` for human, `e` for entity, `a` for agent/animal -->
+<!-- * **x**: eXtension, eXperiments: for personal use -->
 
 
 
@@ -58,11 +95,12 @@ In detail, it is required that the identifier in question ...
 
 
 
-## Separator Symbol
+<!-- ## Separator Symbol
 Should be URI compatible.
 
 ```
 i.url:  fits well into uri/URN scheme
+i-url:   fully urn compatible
 i#url:
 i~url:
 i&url:
@@ -73,25 +111,24 @@ i'url:
 ~i#url
 ~q#si
 id2:i:url
+§d:url:
 ```
-Full URN compatible: `urn:id2:i#url`
 
 
 * should work as html attribute, css class name [a-z0-9_-]. https://www.w3.org/TR/CSS2/syndata.html#characters
 * should be urn compatible
+ -->
 
 
-## Unicode version
-In unicode strings, we can use symbols to further reduce the ID2 to
 
-```
-d: 📄doi:
-i: 🆔uuid:
-l: 🌐gps:  
-o: 📦ean:
-p: 👤tel:
-q: 🔢si:
-t: ⏲24h:
-```
+## Related Work
+
+* URN-DEV: https://tools.ietf.org/html/draft-ietf-core-dev-urn-11#page-10
+
+* Schema: https://schema.org/identifier
 
 
+
+## References
+
+* https://learning.oreilly.com/library/view/regular-expressions-cookbook
