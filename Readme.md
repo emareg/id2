@@ -1,11 +1,11 @@
-# ID2 – Identifier Identifiers
+# ID2 – Identifier Identifier
 
-Demo: https://emanuel.regnath.info/id2/id2.html
+Demo: https://id2.dev
 
-We humans like to ask the four "W" questions: who, what, when, and where. That is why our brains have invented identifiers to answer them but they are also useful for computers to locate resouces.
+We humans like to ask the four "W" questions: who, what, when, and where. That is why our brains have invented identifiers to answer these questions.
 However, today there are so many identification schemes that it becomes difficult to distinguish them. Do you know what `8FWH4HX8+QR` or `1.3.6.1.4.1.343` identifies? 
 
-As a remedy, we are introducing ID2, an identifier idenfication scheme that 
+As a remedy, we are introducing ID², an identifier idenfication scheme that 
 
 * annotates identifiers in a standardized pure-text form
 * has a short and fixed maximum length
@@ -16,12 +16,13 @@ As a remedy, we are introducing ID2, an identifier idenfication scheme that
 ## Syntax
 The full syntax of an ID2 is 
 
-`ID2 = "id2" ":" [dilowtx] ":" [a-z0-9]{2,4} ":" CHAR+`
+`ID2 = "id2" ":" [digowtx] ":" [a-z0-9]{2,4} ":" CHAR+`
 
+**Example**
 ```
    class   identifier
      |     ┌────┴────┐
- id2:l:olc:8FWH4HX8+QR
+ id2:g:olc:8FWH4HX8+QR
  └┬┘   └┬┘            
 prefix type       
 ```
@@ -29,10 +30,10 @@ prefix type
 An even shorter form for certain well-known and well-defined IDs are possible in the form of
 
 ```
- §l:8FWH4HX8+QR
+ §g:8FWH4HX8+QR
 ```
 
-In this case `§` serves as the prefix, `l` is the class of the identifier, `:` the separator, and the rest the identifier itself.
+In this case `§` serves as the prefix, `g` is the class of the identifier, `:` the separator, and the rest the identifier itself.
 
 
 
@@ -45,7 +46,7 @@ Furthermore, classes help to prevent name clashes of ID types in case two or mor
 |---------|-------------------------|---------|
 | **`d`** | Document, Digital Media | DOI     |
 | **`i`** | General Identifier      | UUID    |
-| **`l`** | Location                | OLC     |
+| **`g`** | Geographic Location     | OLC     |
 | **`o`** | Object (physical)       | EAN     |
 | **`t`** | Time                    | 24h     |
 | **`q`** | Quantity                | NUM     |
@@ -53,23 +54,26 @@ Furthermore, classes help to prevent name clashes of ID types in case two or mor
 | **`x`** | eXtension, eXperiments  | --      |
 
 
-<!-- * **a**: address  agent/animal -->
-<!-- * **c**: Code, Command -->
+<!-- * **a**: address/asset  agent/animal -->
+<!-- * **c**: Class / Classification Codes (ICD, CWE, CC/NAT/LANG) -->
 <!-- * **d**: Document, digital media, duplicatable -->
 <!-- * **i**: general Identifier, transferable -->
 <!-- * **l**: Location  -->
-<!-- => G für geo-location,  -->
+<!-- * **g**: global, geo-location  -->
 <!-- * **o**: Object (phyiscal), one -->
 <!-- * **t**: Time -->
 <!-- * **h**: Hash digests -->
 <!-- * **q**: quantity, amount -->
+<!-- * **u**: unique individual, non transfereable -->
 <!-- * **p**: person, people, comPany -->
 <!-- * **r**: resource -->
 <!-- * **f**: Format/Language: (JSON, TOML, HTML, Text)  this is not an "ID" -->
-<!-- * **k**: keys -->
+<!-- * **k**: crypto keys -->
 <!-- * **w**: Who, uniquely identifies a person   -->
 <!-- => `h` for human, `e` for entity, `a` for agent/animal -->
 <!-- * **x**: eXtension, eXperiments: for personal use -->
+<!-- * **y**: crYpto, currencYs -->
+<!-- * **z**: zoo, life-forms besides humans -->
 
 
 
@@ -120,13 +124,28 @@ id2:i:url
  -->
 
 
+<!-- 
+## ToDo Identifiers
+
+NVD: https://nvd.nist.gov/vuln 
+CWE: https://cwe.mitre.org/data/definitions/  CWE-478
+Auto-ISAC
+
+* FSC Certificate: FSC-C003255 https://info.fsc.org/certificate.php
+* CE Certificate
+* ICD 
+-->
+
 
 ## Related Work
 
 * URN-DEV: https://tools.ietf.org/html/draft-ietf-core-dev-urn-11#page-10
 
-* Schema: https://schema.org/identifier
+* Schema.org: https://schema.org/identifier
 
+* Identifiers.org https://registry.identifiers.org/registry
+
+* https://en.wikipedia.org/wiki/MIRIAM_Registry
 
 
 ## References

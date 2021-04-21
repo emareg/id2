@@ -6,7 +6,7 @@ id2ids = Array();
 function rematch(t, id, types){
     regex=id2[id]["re"]
     // console.log(regex)
-    found=t.match(RegExp('^'+regex+'\\b'))
+    found=t.match(RegExp('^'+regex+'$'))
     if(found != null){
     	res=id2[id]
     	res["fullid"]="id2:"+res['id']+":"+found[0]
@@ -18,7 +18,7 @@ function rematch(t, id, types){
 function checkID2(t, types){
 	if(t.length < 9){ return false }
 	var pretypes = [];
-	matches = t.match(RegExp('^id2:([idhloqtw]:[a-z]{2,4}):(.+)'))
+	matches = t.match(RegExp('^id2:([idhgoqtw]:[a-z0-9]{2,4}):(.+)'))
 	if(matches == null ){ return false }
 	id = matches[1]
 	q = matches[2]
@@ -92,10 +92,4 @@ function iterateAllIds(t){
 	}
 	checkID2(t, types)
 	return types
-}
-
-
-function isInt(str){
-	// return !isNaN(str) && Number.isInteger(str)
-	return /^[0-9]{1,30}$/.test(str)
 }
