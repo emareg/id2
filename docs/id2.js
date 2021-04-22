@@ -18,7 +18,7 @@ function rematch(t, id, types){
 function checkID2(t, types){
 	if(t.length < 9){ return false }
 	var pretypes = [];
-	matches = t.match(RegExp('^id2:([idhgoqtw]:[a-z0-9]{2,4}):(.+)'))
+	matches = t.match(RegExp('^(?:id2:|§)?([idhgoqtw]:[a-z0-9]{2,4}):(.+)'))
 	if(matches == null ){ return false }
 	id = matches[1]
 	q = matches[2]
@@ -28,6 +28,19 @@ function checkID2(t, types){
 			types.push(pretypes[0])
 			return true
 		}
+	}
+}
+
+
+
+
+function checkQuery(){
+	if (window.location.search.length < 10){ return false; }
+	query = decodeURIComponent(window.location.search.substring(1))
+	console.log("Checking Query");
+	var types = [];
+	if (checkID2(query, types)){
+		window.location.href = types[0]["url"]+types[0]["part"];
 	}
 }
 

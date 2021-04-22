@@ -19,11 +19,14 @@
 
 	window.onload = function () {
 		console.log("Welcome to ID2!");
+		var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search
+		console.log(window.location.search);
 		const box = document.getElementById('idbox');	
 		box.addEventListener('input', handleInput);
 		selfTest()
 		createTable()
 		parseRegex()
+		checkQuery()
 	};
 
 	 function loadJSON(path, callback) {   

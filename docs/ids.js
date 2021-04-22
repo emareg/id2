@@ -51,7 +51,7 @@ id2data={
 	"len": "6,8,10,12,14,16",
 	"desc": "Military Grid Reference System",
 	"ex": "4QFJ1093763778",
-	"url": ""
+	"url": "https://mappingsupport.com/p2/gissurfer.php?center="
 },
 "g:utm": {
 	"id": "g:utm",
