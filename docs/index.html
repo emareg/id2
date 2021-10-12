@@ -13,23 +13,27 @@
 	<!-- load basic style sheet -->
 	<link rel="stylesheet" href="https://classless.de/classless.css">
 	<script type="text/javascript" src="ids.js"></script>
+	<script type="text/javascript" src="ids-extra.js"></script>
 	<script type="text/javascript" src="id2.js"></script>
     <script type="text/javascript">
 
 
 	window.onload = function () {
 		console.log("Welcome to ID2!");
+		id2data = Object.assign(id2data, id2data_extra)
 		var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search
 		console.log(window.location.search);
 		const box = document.getElementById('idbox');	
 		box.addEventListener('input', handleInput);
-		selfTest()
 		createTable()
 		parseRegex()
+		selfTest()
 		checkQuery()
 	};
 
-	 function loadJSON(path, callback) {   
+
+	// load the JSON file with the ID2 entries
+	function loadJSON(path, callback) {   
 
 	    var xobj = new XMLHttpRequest();
 	    xobj.overrideMimeType("application/json");
@@ -47,7 +51,7 @@
 		// fetch('../ids.json')
   //  			.then(response => response.json())
   //  			.then(json => {});	
-	 }
+	}
 
 	function handleJSON(json){
 		createTable(ids)
@@ -74,6 +78,7 @@
 	        } else {
 	        	item.innerHTML = ids[i]['fullid'];
 	        }
+	        item.innerHTML += '&emsp;('+ids[i]['desc']+')'
 	        ol.appendChild(item);
 		}
 		if(ids.length == 0){
@@ -118,6 +123,7 @@ td {
 	<!-- Header: -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->  
 	<header>
+		<p class="pt-1"><strong id="id2-query"></strong></p>
 		<h1>ID2 – Identify Identifiers</h1>
 		<p>Copy any kind of identifier into the following box.</p>
 		<input class="w-100" id="idbox" placeholder="paste a string">

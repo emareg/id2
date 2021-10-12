@@ -16,32 +16,49 @@ function rematch(t, id, types){
 }
 
 function checkID2(t, types){
-	if(t.length < 9){ return false }
+	if(t.length < 8){ return false }
 	var pretypes = [];
-	matches = t.match(RegExp('^(?:id2:|§)?([idhgoqtw]:[a-z0-9]{2,4}):(.+)'))
+	matches = t.match(RegExp('^(?:id2:|§)?([idhgoqtw]:[a-z0-9]{2,4})(?::(.+))?'))
 	if(matches == null ){ return false }
 	id = matches[1]
-	q = matches[2]
-	if (id != "" && id2ids.includes(id)){
-		rematch(q, id, pretypes)
-		if(pretypes.length > 0 && pretypes[0]['id'] == id){
-			types.push(pretypes[0])
-			return true
+	if(matches[2]){
+		q = matches[2]
+		if (id != "" && id2ids.includes(id)){
+			rematch(q, id, pretypes)
+			if(pretypes.length > 0 && pretypes[0]['id'] == id){
+				types.push(pretypes[0])
+				return true
+			}
 		}
+	} else if (id2ids.includes(id)){
+		types.push(id2['i:id2'])
+		return true
 	}
 }
 
 
 
-
+// check the query part in the URL
 function checkQuery(){
 	if (window.location.search.length < 10){ return false; }
 	query = decodeURIComponent(window.location.search.substring(1))
-	console.log("Checking Query");
+	console.log("Checking Query: ", query);
 	var types = [];
 	if (checkID2(query, types)){
-		window.location.href = types[0]["url"]+types[0]["part"];
+		if (types[0]["id"] == "i:id2"){
+			console.log("Query is ID2!", types);
+			var idtype = query.substring(4)
+			if(id2data[idtype]){
+				el = document.getElementById('id2-query')
+				el.innerHTML = query+" is an ID2 for "+id2data[idtype]['desc']+"!"
+			}
+			return
+		}
+		if(types[0]["url"] != ""){
+			window.location.href = types[0]["url"]+types[0]["part"];
+		}
 	}
+	return types
 }
 
 
@@ -52,7 +69,7 @@ function selfTest(){
 		hit = false
 		rematch(ex, key, types)
 		types.forEach(match => {
-			if(match['id'] == key){
+			if(match['id'] == key && entry['lens'].includes(ex.length)){
 				hit = true
 			}
 		});
@@ -63,7 +80,7 @@ function selfTest(){
 }
 
 
-
+// parses all valid ID2 entries and builds the length LUT
 function parseRegex(){
 	// id2.forEach((value, key) => {
 	// });
@@ -80,8 +97,8 @@ function parseRegex(){
 				// if(imax == NaN){ imax = 40; }
 				if(nums[1] == ""){ nums[1] = "40"; } // fixme: use -1 to indicate infinity
 				imax = parseInt(nums[1])
-				// console.log("range: ", part, imin, imax)
-				lens = lens.concat(Array(imax-imin).fill().map((_, idx) => imin + idx))
+				lens = lens.concat(Array(imax+1-imin).fill().map((_, idx) => imin + idx))
+				// console.log(key, "range: ", part, imin, imax, lens)
 			} else {
 				lens.push(imin)
 			}
