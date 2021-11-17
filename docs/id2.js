@@ -1,15 +1,14 @@
 
-const id2 = id2data;
-id2ids = Array();
+id2ids = Array(); // for performance, contains only ids
 
 
 function rematch(t, id, types){
-    regex=id2[id]["re"]
+    regex=id2data[id]["re"]
     // console.log(regex)
     found=t.match(RegExp('^'+regex+'$'))
     if(found != null){
-    	res=id2[id]
-    	res["fullid"]="id2:"+res['id']+":"+found[0]
+    	res=id2data[id]
+    	res["fullid"]="id2:"+res['id']+":"+found[1]
     	res["part"]=found[1]
         types.push(res)
     }
@@ -18,7 +17,7 @@ function rematch(t, id, types){
 function checkID2(t, types){
 	if(t.length < 8){ return false }
 	var pretypes = [];
-	matches = t.match(RegExp('^(?:id2:|§)?([idhgoqtw]:[a-z0-9]{2,4})(?::(.+))?'))
+	matches = t.match(RegExp('^(?:id2:|§)?([idhgoqtwx]:[a-z0-9]{2,4})(?::(.+))?'))
 	if(matches == null ){ return false }
 	id = matches[1]
 	if(matches[2]){
@@ -31,7 +30,7 @@ function checkID2(t, types){
 			}
 		}
 	} else if (id2ids.includes(id)){
-		types.push(id2['i:id2'])
+		types.push(id2data['i:id2'])
 		return true
 	}
 }
@@ -64,7 +63,7 @@ function checkQuery(){
 
 function selfTest(){
 	types = []
-	for (const [key, entry] of Object.entries(id2)) {
+	for (const [key, entry] of Object.entries(id2data)) {
 		ex=entry['ex']
 		hit = false
 		rematch(ex, key, types)
@@ -84,7 +83,7 @@ function selfTest(){
 function parseRegex(){
 	// id2.forEach((value, key) => {
 	// });
-	for (const [key, val] of Object.entries(id2)) {
+	for (const [key, val] of Object.entries(id2data)) {
 		id2ids.push(val['id'])
 		lens = Array()
 
@@ -105,7 +104,7 @@ function parseRegex(){
 		});
 
 		// assign lengths
-		id2[key]['lens'] = lens
+		id2data[key]['lens'] = lens
 	}
 	
 }
@@ -115,7 +114,7 @@ function parseRegex(){
 function iterateAllIds(t){
 	t = t.trim()
 	var types = [];
-	for (const [key, entry] of Object.entries(id2)) {
+	for (const [key, entry] of Object.entries(id2data)) {
 		if (entry['lens'].includes(t.length)) {
 			rematch(t, key, types)
 		}

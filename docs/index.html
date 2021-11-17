@@ -12,28 +12,35 @@
 
 	<!-- load basic style sheet -->
 	<link rel="stylesheet" href="https://classless.de/classless.css">
-	<script type="text/javascript" src="ids.js"></script>
-	<script type="text/javascript" src="ids-extra.js"></script>
+	<!-- <script type="text/javascript" src="ids.js"></script> -->
+	<!-- <script type="text/javascript" src="ids-extra.js"></script> -->
+	<script type="text/javascript">
+    	var id2data = {};
+	</script>
 	<script type="text/javascript" src="id2.js"></script>
     <script type="text/javascript">
 
 
 	window.onload = function () {
 		console.log("Welcome to ID2!");
-		id2data = Object.assign(id2data, id2data_extra)
+		// id2data = Object.assign(id2data, id2data_extra)
+		
+		requestJSON("id2data.json", addJSON)
+		requestJSON("id2data-extra.json", addLastJSON)
+
 		var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search
 		console.log(window.location.search);
 		const box = document.getElementById('idbox');	
 		box.addEventListener('input', handleInput);
-		createTable()
-		parseRegex()
-		selfTest()
-		checkQuery()
+		// createTable()
+		// parseRegex()
+		// selfTest()
+		// checkQuery()
 	};
 
 
 	// load the JSON file with the ID2 entries
-	function loadJSON(path, callback) {   
+	function requestJSON(path, callback) {   
 
 	    var xobj = new XMLHttpRequest();
 	    xobj.overrideMimeType("application/json");
@@ -47,14 +54,21 @@
 	            callback(xobj.responseText);
 	          }
 	    };
-	    xobj.send(null);  
-		// fetch('../ids.json')
-  //  			.then(response => response.json())
-  //  			.then(json => {});	
+	    xobj.send(null);
 	}
 
-	function handleJSON(json){
-		createTable(ids)
+
+	function addJSON(json){
+		// console.log(json)
+		id2data = Object.assign(id2data, JSON.parse(json))
+	}
+
+	function addLastJSON(json){
+		addJSON(json)
+		createTable()
+		parseRegex()
+		selfTest()
+		checkQuery()
 	}
 
 	function handleInput(e){
@@ -88,7 +102,7 @@
 		}
 	}
 
-	function createTable(ids){
+	function createTable(){
 		table = document.getElementById("id-table")
 
 		for (var id in id2data) {
@@ -126,7 +140,7 @@ td {
 		<p class="pt-1"><strong id="id2-query"></strong></p>
 		<h1>ID2 – Identify Identifiers</h1>
 		<p>Copy any kind of identifier into the following box.</p>
-		<input class="w-100" id="idbox" placeholder="paste a string">
+		<input class="w-100" id="idbox" placeholder="paste a string, e.g. 'rfc793'">
 	</header>
 
 	<!-- Navigation: -->
@@ -146,21 +160,32 @@ td {
 		
 		<div>
 			<h3>Results:</h3>
-			<div id="results" class="w100" style="height:7em; border: 2px solid; padding: 0.5em;">		
+			<div id="results" class="w100" style="height:9em; border: 2px solid; padding: 0.5em; overflow-y: scroll;">		
 			</div>			
 		</div>
 
 		<section id="id2classes">
+			<h2>The ID2 Scheme</h2>
+			Besides guessing an identifier, ID2 provides a universal scheme for the notation of many identifiers. The general form is
+
+			<pre><code>   class   identifier
+     |     ┌────┴────┐
+ id2:g:olc:8FWH4HX8+QR
+ └┬┘   └┬┘            
+prefix type</code></pre>
+
 			<h3>ID2 Classes</h3>
 			<p>The following classes exist:</p>
 			<table>
 				<!-- <thead><tr></tr></thead> -->
 				<tbody id="id2classes">
 					<tr><td><code>d</code></td><td>document, digital media, duplicatable</td></tr>
-					<tr><td><code>g</code></td><td>global geographic location</td></tr>
 					<tr><td><code>i</code></td><td>general Identifier, transferable</td></tr>
+					<tr><td><code>g</code></td><td>global geographic location</td></tr>
+					<tr><td><code>h</code></td><td>hashes, mostly used by crypto currencies</td></tr>
 					<tr><td><code>o</code></td><td>object (physical), one</td></tr>
-					<tr><td><code>q</code></td><td>quantity, amount</td></tr>
+					<!-- <tr><td><code>q</code></td><td>quantity, amount</td></tr> -->
+					<tr><td><code>t</code></td><td>time</td></tr>
 					<tr><td><code>w</code></td><td>Who, uniquely identifies a person</td></tr>
 					<tr><td><code>x</code></td><td>eXtension, eXperiments: for personal use</td></tr>	
 				</tbody>
