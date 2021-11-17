@@ -111,7 +111,9 @@
 			stlye='style="text-align: left;max-width: 10em; white-space: normal;"'
 			example=e['ex']
 			if(e['url'] != ""){
-				example='<a href="'+e['url']+e['ex']+'">'+e['ex']+'</a>'
+				idtype=id.substring(2);
+				part=e['ex'].replace( new RegExp(`^${idtype}[ :-]?\s*`, 'i'), "");
+				example='<a href="'+e['url']+part+'">'+e['ex']+'</a>'
 			}
 			tr.innerHTML='<td style="text-align: right;">'+
 				e['id']+'</td><td >'+e['desc']+'</td><td >'+example+'</td>'
