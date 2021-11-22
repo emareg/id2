@@ -124,23 +124,6 @@ id2:i:url
  -->
 
 
-<!-- 
-## ToDo Identifiers
-
-NVD: https://nvd.nist.gov/vuln 
-CWE: https://cwe.mitre.org/data/definitions/  CWE-478
-Auto-ISAC
-
-* FSC Certificate: FSC-C003255 https://info.fsc.org/certificate.php
-* CE Certificate
-* ICD 
-
-
-
-## Candidates for 
-
-
--->
 
 
 ## Related Work
@@ -150,6 +133,8 @@ Auto-ISAC
 * Schema.org: https://schema.org/identifier
 
 * Identifiers.org https://registry.identifiers.org/registry
+
+* W3ID https://w3id.org/
 
 * https://en.wikipedia.org/wiki/MIRIAM_Registry
 

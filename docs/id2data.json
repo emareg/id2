@@ -194,7 +194,7 @@
 	"len": "5-7",
 	"desc": "Common Weakness Enumeration",
 	"ex": "CWE-478",
-	"url": "https://cwe.mitre.org/data/definitions/CWE-"
+	"url": "https://cwe.mitre.org/data/definitions/"
 },
 "d:ecli": {
 	"id": "d:ecli",
