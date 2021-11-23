@@ -132,7 +132,7 @@
 	"len": "10",
 	"desc": "Amazon Standard Identification Number",
 	"ex": "B000F9J5RA",
-	"url": "https://amazon.com/dp/"
+	"url": "https://amzn.com/"
 },
 
 "o:imo": {
@@ -392,7 +392,7 @@
 	"len": "27",
 	"desc": "IUPAC International Chemical Identifier Key",
 	"ex": "RYYVLZVUVIJVGH-UHFFFAOYSA-N",
-	"url": "http://www.chemspider.com/inchikey="
+	"url": "https://www.chemspider.com/inchikey="
 }
 
 }
