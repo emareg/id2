@@ -24,19 +24,14 @@
 
 	window.onload = function () {
 		console.log("Welcome to ID2!");
-		// id2data = Object.assign(id2data, id2data_extra)
-		
-		// xobj = requestJSON("id2data.json", addJSON)
-		// if (xobj.status == 200){ addJSON(xobj.responseText) }
-		// xobj = requestJSON("id2data-extra.json", addLastJSON)
-		// if (xobj.status == 200){ addJSON(xobj.responseText) }
+
 		var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search
 		console.log(window.location.search);
 		const box = document.getElementById('idbox');	
 		box.addEventListener('input', handleInput);
 
 
-		// Make multiple request
+		// Load multiple JSON files via fetch API
 		Promise.all([
 			fetch("id2data.json"),
 			fetch("id2data-extra.json")
@@ -58,50 +53,8 @@
 			console.log(error);
 		});
 
-		fetch("id2data.json").then(response => response.json()).then(data => {id2data = data }); //.then(json => addJSON(json));
-		// fetch("id2data.json").then(response => response.json()).then(json => addLastJSON(json));
-
-
-		// createTable()
-		// parseRegex()
-		// selfTest()
-		// checkQuery()
 	};
 
-
-	// load the JSON file with the ID2 entries
-	function requestJSON(path, callback) {   
-
-	    var xobj = new XMLHttpRequest();
-	    xobj.overrideMimeType("application/json");
-	    xobj.open('GET', path, false);  // true=async, false=sync
-		xobj.setRequestHeader('Accept', 'application/json');
-		xobj.setRequestHeader('Access-Control-Allow-Headers', '*');
-		xobj.setRequestHeader('Access-Control-Allow-Origin', 'file:///');
-	    // xobj.onreadystatechange = function () {
-	    //       if (xobj.readyState == 4 && xobj.status == "200") {
-	    //         // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-	    //         callback(xobj.responseText);
-	    //       }
-	    // };
-	    xobj.send(null);
-	    return xobj
-	}
-
-
-	function addJSON(json){
-		// console.log(json)
-		id2data = Object.assign(id2data, JSON.parse(json))
-	}
-
-	function addLastJSON(json){
-		if (Object.keys(id2data).length === 0) { }
-		addJSON(json)
-		createTable()
-		parseRegex()
-		selfTest()
-		checkQuery()
-	}
 
 	function handleInput(e){
 		var t = e.target.value;
