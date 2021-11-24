@@ -26,13 +26,42 @@
 		console.log("Welcome to ID2!");
 		// id2data = Object.assign(id2data, id2data_extra)
 		
-		requestJSON("id2data.json", addJSON)
-		requestJSON("id2data-extra.json", addLastJSON)
-
+		// xobj = requestJSON("id2data.json", addJSON)
+		// if (xobj.status == 200){ addJSON(xobj.responseText) }
+		// xobj = requestJSON("id2data-extra.json", addLastJSON)
+		// if (xobj.status == 200){ addJSON(xobj.responseText) }
 		var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search
 		console.log(window.location.search);
 		const box = document.getElementById('idbox');	
 		box.addEventListener('input', handleInput);
+
+
+		// Make multiple request
+		Promise.all([
+			fetch("id2data.json"),
+			fetch("id2data-extra.json")
+		]).then(responses => {
+			return Promise.all(responses.map(function (response) {
+				return response.json();
+			}));
+		}).then(function (data) {
+			// console.log(data);
+			for (const el of data) {
+				id2data = Object.assign(id2data, el);
+			}
+			createTable()
+			parseRegex()
+			selfTest()
+			checkQuery()			
+		}).catch(function (error) {
+			// if there's an error, log it
+			console.log(error);
+		});
+
+		fetch("id2data.json").then(response => response.json()).then(data => {id2data = data }); //.then(json => addJSON(json));
+		// fetch("id2data.json").then(response => response.json()).then(json => addLastJSON(json));
+
+
 		// createTable()
 		// parseRegex()
 		// selfTest()
@@ -45,17 +74,18 @@
 
 	    var xobj = new XMLHttpRequest();
 	    xobj.overrideMimeType("application/json");
-	    xobj.open('GET', path, true); // Replace 'my_data' with the path to your file
+	    xobj.open('GET', path, false);  // true=async, false=sync
 		xobj.setRequestHeader('Accept', 'application/json');
 		xobj.setRequestHeader('Access-Control-Allow-Headers', '*');
 		xobj.setRequestHeader('Access-Control-Allow-Origin', 'file:///');
-	    xobj.onreadystatechange = function () {
-	          if (xobj.readyState == 4 && xobj.status == "200") {
-	            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-	            callback(xobj.responseText);
-	          }
-	    };
+	    // xobj.onreadystatechange = function () {
+	    //       if (xobj.readyState == 4 && xobj.status == "200") {
+	    //         // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+	    //         callback(xobj.responseText);
+	    //       }
+	    // };
 	    xobj.send(null);
+	    return xobj
 	}
 
 
@@ -65,6 +95,7 @@
 	}
 
 	function addLastJSON(json){
+		if (Object.keys(id2data).length === 0) { }
 		addJSON(json)
 		createTable()
 		parseRegex()
