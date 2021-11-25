@@ -1,5 +1,7 @@
 # ID2 – Identifier Identifier
 
+[![Actions Status](https://github.com/emareg/id2/workflows/CI/badge.svg)](https://github.com/emareg/id2)
+
 Demo: https://id2.dev
 
 We humans like to ask the four "W" questions: who, what, when, and where. That is why our brains have invented identifiers to answer these questions.
