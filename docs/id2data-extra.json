@@ -417,7 +417,7 @@
 	"desc": "Forsythe-Edwards Notation",
 	"len": "25-75",
 	"ex": "r4rk1/pbqn1pp1/1pn1p2p/2ppP2Q/3P4/2PBP1B1/PP1N2PP/R4RK1 w - - 0 14",
-	"url": "http://www.ee.unb.ca/cgi-bin/tervo/fen.pl?select="
+	"url": "https://lichess.org/editor?fen="
 },
 
 
