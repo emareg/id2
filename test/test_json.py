@@ -2,7 +2,7 @@ import json
 import re
 import sys
 
-from src.id2 import id2data
+from id2 import id2data
 
 
 def isUrlOk(url):

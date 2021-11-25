@@ -3,7 +3,7 @@ import re
 import sys
 import cProfile, pstats
 
-from src.id2 import guessId, id2data
+from id2 import guessId, id2data
 
 
 prof = cProfile.Profile()
