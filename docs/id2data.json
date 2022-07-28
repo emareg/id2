@@ -369,6 +369,14 @@
 	"ex": "AddZkjqPoPyhDhWoA8f9CXQeHQRDr8HbPo",
 	"url": "https://neotracker.io/address/"
 },
+"h:sol": {
+	"id": "h:sol",
+	"re": "([1-9A-HJ-NP-Za-km-z]{32,44})",
+	"len": "32,44",
+	"desc": "Cryptocurrency Solana",
+	"ex": "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
+	"url": "https://explorer.solana.com/address/"
+},
 "h:cid0": {
 	"id": "h:cid0",
 	"re": "(Qm[1-9A-HJ-NP-Za-km-z]{44})",
