@@ -324,7 +324,14 @@
 	"ex": "U+1F194",
 	"url": "https://www.compart.com/en/unicode/U+"
 },
-
+"i:irdi": {
+	"id": "i:irdi",
+	"re": "([0-9]{1,4}[-/].{1,35}(?:[-/][0-9])?(?:.{1,35})?#(?:[0-9a-zA-Z]{2}[-/])?[0-9a-zA-Z]{1,35}#[0-9]{1,4})",
+	"desc": "International Registration Data Identifier",
+	"len": "6-64",
+	"ex": "0173-1#01-ACH895#007",
+	"url": ""
+},
 
 
 
