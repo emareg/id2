@@ -145,7 +145,14 @@
 	"url": "https://www.ups.com/WebTracking/processInputRequest?tracknum="
 },
 
-
+"o:fcc": {
+	"id": "o:fcc",
+	"re": "((?:[A-Z0-9]{3}|[A-Z0-9]{5})-?[0-9A-Z]{6,12})",
+	"len": "10-16",
+	"desc": "Federal Communications Commission Product ID",
+	"ex": "A3L-SMA256U",
+	"url": "https://fccid.io/"
+},
 
 
 "d:doi": {
@@ -408,6 +415,16 @@
 	"desc": "IUPAC International Chemical Identifier Key",
 	"ex": "RYYVLZVUVIJVGH-UHFFFAOYSA-N",
 	"url": "https://www.chemspider.com/inchikey="
+},
+
+"h:cxid": {
+	"id": "h:cxid",
+	"re": "([A-Pa-p]{32})",
+	"len": "32",
+	"desc": "Chrome Extension ID",
+	"ex": "blillmbchncajnhkjfdnincfndboieik",
+	"url": "https://chromewebstore.google.com/detail/"
 }
+
 
 }

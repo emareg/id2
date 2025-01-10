@@ -125,7 +125,21 @@ id2:i:url
 * should be urn compatible
  -->
 
+## Usage
 
+```
+python app/openID2.py IDENTIFIER
+```
+
+For AutoHotkey, you could invoke the script when selecting an identifier and pressing `Win+a`:
+```
+; Use ID2 in Browser
+#a::
+    Send, ^c
+    Sleep 50
+    Run, python "app\openID2.py" "%clipboard%"
+    Return
+```
 
 
 ## Related Work

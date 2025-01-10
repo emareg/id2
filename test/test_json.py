@@ -1,8 +1,9 @@
 import json
 import re
 import sys
+sys.path.append('../')
 
-from id2 import id2data
+from src.id2 import id2data
 
 
 def isUrlOk(url):

@@ -6,7 +6,7 @@ import json
 import time
 
 
-CFG_JSON_FILES=["docs/id2data.json", "docs/id2data-extra.json"]
+CFG_JSON_FILES=["../docs/id2data.json", "../docs/id2data-extra.json"]
 id2data = {}
 
 
@@ -73,7 +73,7 @@ class ID2:
 
 def addJSON(jsonPath):
     global id2data
-    with open(jsonPath) as json_file:
+    with open(jsonPath, encoding='utf-8') as json_file:
         newdata = json.load(json_file)
         id2data = {**id2data, **newdata}         
 
