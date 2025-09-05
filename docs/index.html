@@ -47,7 +47,13 @@
 			createTable()
 			parseRegex()
 			selfTest()
-			checkQuery()			
+			ids = checkQuery();
+			if (ids.length == 1 && ids[0]["url"] != ""){
+				console.log("Query:", ids[0])
+				window.location.href = ids[0]["url"]+ids[0]["part"];
+			} else if (ids.length > 1){
+				showResults(ids);
+			}
 		}).catch(function (error) {
 			// if there's an error, log it
 			console.log(error);
@@ -61,6 +67,10 @@
 		console.time();
 		ids = iterateAllIds(t)
 		console.timeEnd();  // measure time
+		showResults(ids);
+	}
+
+	function showResults(ids){
 		res = document.getElementById("results")
 		res.textContent = '';
 	    ol = document.createElement('ol');

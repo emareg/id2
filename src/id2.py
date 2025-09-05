@@ -4,9 +4,15 @@ import re
 import os
 import json
 import time
+from pathlib import Path
+
+script_dir = Path(__file__).resolve().parent
 
 
-CFG_JSON_FILES=["../docs/id2data.json", "../docs/id2data-extra.json"]
+CFG_JSON_FILES=[
+    script_dir.joinpath("../docs/id2data.json"), 
+    script_dir.joinpath("../docs/id2data-extra.json")
+    ]
 id2data = {}
 
 

@@ -87,7 +87,7 @@
 	"len": "20",
 	"desc": "Legal Entity Identifier",
 	"ex": "724500VKKSH9QOLTFR81",
-	"url": "https://lei-search.lei-worldwide.com/search-results.html?lei="
+	"url": "https://search.gleif.org/#/record/"
 },
 "w:bic": {
 	"id": "w:bic",
@@ -123,7 +123,7 @@
 	"re": "(B[0-9A-Z]{9}|[0-9]{9}(X|0-9))",
 	"len": "10",
 	"desc": "Amazon Standard Identification Number",
-	"ex": "B000F9J5RA",
+	"ex": "B00LH3DMUO",
 	"url": "https://amzn.com/"
 },
 
@@ -329,7 +329,7 @@
 	"desc": "Unicode Symbol",
 	"len": "6-9",
 	"ex": "U+1F194",
-	"url": "https://www.compart.com/en/unicode/U+"
+	"url": "https://unicodeplus.com/U+"
 },
 "i:irdi": {
 	"id": "i:irdi",

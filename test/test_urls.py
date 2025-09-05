@@ -1,8 +1,11 @@
 import json
 import re
+import sys
 from urllib.request import Request, urlopen, HTTPError, URLError
 from urllib.parse import quote
 
+sys.path.append('./src')
+sys.path.append('../src')
 from id2 import guessId, id2data
 
 

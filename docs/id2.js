@@ -14,6 +14,7 @@ function rematch(t, id, types){
     }
 }
 
+// test if given token is id2 formatted
 function checkID2(t, types){
 	if(t.length < 8){ return false }
 	var pretypes = [];
@@ -39,7 +40,7 @@ function checkID2(t, types){
 
 // check the query part in the URL
 function checkQuery(){
-	if (window.location.search.length < 10){ return false; }
+	if (window.location.search.length < 8){ return false; }
 	query = decodeURIComponent(window.location.search.substring(1))
 	console.log("Checking Query: ", query);
 	var types = [];
@@ -51,11 +52,13 @@ function checkQuery(){
 				el = document.getElementById('id2-query')
 				el.innerHTML = query+" is an ID2 for "+id2data[idtype]['desc']+"!"
 			}
-			return
+			return types
 		}
 		if(types[0]["url"] != ""){
 			window.location.href = types[0]["url"]+types[0]["part"];
 		}
+	} else {
+		return iterateAllIds(query)
 	}
 	return types
 }

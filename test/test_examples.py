@@ -3,7 +3,9 @@ import re
 import sys
 import cProfile, pstats
 
-sys.path.append('../')
+print(__file__)
+
+sys.path.append('./src')
 sys.path.append('../src')
 from id2 import guessId, id2data
 
