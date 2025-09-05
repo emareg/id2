@@ -26,10 +26,10 @@ jobs:
       - uses: actions/checkout@v2
 
       # Setup Python
-      - name: Set up Python 3.8
+      - name: Set up Python 3.13
         uses: actions/setup-python@v1
         with:
-          python-version: 3.8
+          python-version: 3.13
 
       # Runs a set of tests
       - name: test_example
